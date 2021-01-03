@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block nav %}
+    {% set menuActive=menuActive|default('dashboard') %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a href="{{ path('private_dashboard') }}" class="navbar-brand">Mileage</a>
@@ -15,8 +16,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navPrimary">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a href="{{ path('private_dashboard') }}" class="nav-link">Dashboard <span class="sr-only">(current)</span></a>
+                    {% set active=menuActive=='dashboard' %}
+                    <li class="nav-item{% if active %} active{% endif %}">
+                        <a href="{{ path('private_dashboard') }}" class="nav-link">
+                            Dashboard
+                            {% if active %}<span class="sr-only">(current)</span>{% endif %}
+                        </a>
+                    </li>
+                    {% set active=menuActive=='car' %}
+                    <li class="nav-item{% if active %} active{% endif %}">
+                        <a href="{{ path('private_car_index') }}" class="nav-link">
+                            My cars
+                            {% if active %}<span class="sr-only">(current)</span>{% endif %}
+                        </a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item dropdown">
@@ -43,4 +55,14 @@
             </div>
         </div>
     </nav>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('private') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('private') }}
 {% endblock %}

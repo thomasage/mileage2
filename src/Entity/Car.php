@@ -26,6 +26,12 @@ final class Car implements \Stringable
     public Uuid $uuid;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    public User $owner;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     public string $name;

@@ -1,0 +1,32 @@
+{% extends 'private/car/base.html.twig' %}
+
+{% block body %}
+
+    <h1>My cars</h1>
+
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>License plate</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for car in vm.cars %}
+            <tr>
+                <td>
+                    <a href="#" class="d-block">
+                        {{ car.name }}
+                    </a>
+                </td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.license_plate }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

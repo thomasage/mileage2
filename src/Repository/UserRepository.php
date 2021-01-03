@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Uid\Uuid;
 
 final class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
@@ -35,5 +36,10 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
     public function findByEmail(string $email): ?User
     {
         return $this->findOneBy(['email' => $email]);
+    }
+
+    public function findByUid(Uuid $uuid): ?User
+    {
+        return $this->findOneBy(['uuid' => $uuid]);
     }
 }
