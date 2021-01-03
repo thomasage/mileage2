@@ -1,0 +1,45 @@
+{% extends 'public/security/base.html.twig' %}
+
+{% set menuActive='login' %}
+
+{% block body %}
+
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('public_security_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   value="{{ last_username }}"
+                   id="email"
+                   required
+                   autofocus>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   class="form-control"
+                   name="password"
+                   id="password"
+                   required>
+        </div>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Sign in
+        </button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    </form>
+
+{% endblock %}

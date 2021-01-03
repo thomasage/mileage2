@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    {% set menuActive=menuActive|default('homepage') %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a href="{{ path('public_homepage') }}" class="navbar-brand">Mileage</a>
+            <button type="button"
+                    class="navbar-toggler"
+                    data-toggle="collapse"
+                    data-target="#navPrimary"
+                    aria-controls="navPrimary"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navPrimary">
+                <ul class="navbar-nav mr-auto">
+                    {% set active=menuActive=='homepage' %}
+                    <li class="nav-item{% if active %} active{% endif %}">
+                        <a href="{{ path('public_homepage') }}" class="nav-link">
+                            Homepage
+                            {% if active %} <span class="sr-only">(current)</span>{% endif %}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a href="{{ path('private_dashboard') }}" class="nav-link">Dashboard</a>
+                        </li>
+                    {% else %}
+                        {% set active=menuActive=='login' %}
+                        <li class="nav-item{% if active %} active{% endif %}">
+                            <a href="{{ path('public_security_login') }}" class="nav-link">
+                                Sign in
+                                {% if active %} <span class="sr-only">(current)</span>{% endif %}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

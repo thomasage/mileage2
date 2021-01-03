@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a href="{{ path('private_dashboard') }}" class="navbar-brand">Mileage</a>
+            <button type="button"
+                    class="navbar-toggler"
+                    data-toggle="collapse"
+                    data-target="#navPrimary"
+                    aria-controls="navPrimary"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navPrimary">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="{{ path('private_dashboard') }}" class="nav-link">Dashboard <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item dropdown">
+                            <a href="#"
+                               class="nav-link dropdown-toggle"
+                               id="navAdmin"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navAdmin">
+                                <a href="#" class="dropdown-item">Users</a>
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ path('public_security_logout') }}" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
