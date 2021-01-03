@@ -1,0 +1,3 @@
+field.car: Car
+field.mileage: Mileage
+notification.record_added: 'The record has been added.'
